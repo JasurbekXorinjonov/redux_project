@@ -8,16 +8,15 @@ const ValidationError = () => {
     return Object.keys(error).map((name) => {
       const msg = error[name].join(", ");
       return `${name} - ${msg}`;
+      console.log(msg);
     });
   }, [error]);
-
-  console.log(error !== null && errorMessage());
 
   return (
     error !== null &&
     errorMessage().map((error) => {
       <div className="alert alert-danger" role="alert" key={error}>
-        {error.email}
+        {error}
       </div>;
     })
   );

@@ -23,13 +23,14 @@ function Login() {
       navigate("/");
     } catch (error) {
       dispatch(signUserFailure(error.response.data.errors));
+      console.log(error.response.data.errors);
     }
   };
   useEffect(() => {
     if (loggedIn) {
       navigate("/");
     }
-  }, []);
+  }, [loggedIn]);
 
   return (
     <div className="text-center mt-5">
