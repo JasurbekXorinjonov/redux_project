@@ -1,15 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "../ui/input";
 import { useDispatch, useSelector } from "react-redux";
 import { signUserFailure, signUserStart, signUserSuccess } from "../slice/auth";
 import AuthService from "../service/auth";
 import ValidationError from "./Validation-error";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => state.auth);
 
@@ -24,10 +25,17 @@ function Register() {
     try {
       const response = await AuthService.userRegister(user);
       dispatch(signUserSuccess(response.user));
+      navigate("/");
     } catch (error) {
       dispatch(signUserFailure(error.response.data.errors));
     }
   };
+
+  useEffect(() => {
+    if (loggedIn) {
+      navigate("/");
+    }
+  }, []);
 
   return (
     <div className="text-center mt-5">

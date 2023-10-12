@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { setItem } from "../helpers/store";
+import { setItem } from "../helpers/Local-store";
 
 const initialState = {
   isLoading: false,
