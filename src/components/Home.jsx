@@ -1,16 +1,18 @@
 import { useSelector } from "react-redux";
 import { Loader } from "../ui";
+import { useNavigate } from "react-router-dom";
 function Home() {
   const { articles, isLoading } = useSelector((state) => state.article);
+  const navigate = useNavigate();
 
   return (
-    <div className="container">
+    <>
       {isLoading && <Loader />}
       <div className="album py-5 ">
-        <div className="container">
+        <div>
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            {articles.map((ietm) => (
-              <div className="col " key={ietm.id}>
+            {articles.map((item) => (
+              <div className="col " key={item.id}>
                 <div className="card h-100  shadow-sm">
                   <svg
                     className="bd-placeholder-img card-img-top"
@@ -25,12 +27,15 @@ function Home() {
                     <rect width="100%" height="100%" fill="#55595c"></rect>
                   </svg>
                   <div className="card-body">
-                    <p className="card-text fw-bold m-0">{ietm.title}</p>
-                    <p className="card-text">{ietm.description}</p>
+                    <p className="card-text fw-bold m-0">{item.title}</p>
+                    <p className="card-text">{item.description}</p>
                   </div>
                   <div className="card-footer d-flex justify-content-between align-items-center">
                     <div className="btn-group">
-                      <button type="button" className="btn btn-sm btn-outline-success">
+                      <button
+                        type="button"
+                        onClick={() => navigate(`/article/${item.slug}`)}
+                        className="btn btn-sm btn-outline-success">
                         View
                       </button>
                       <button type="button" className="btn btn-sm btn-outline-secondary">
@@ -41,7 +46,7 @@ function Home() {
                       </button>
                     </div>
                     <small className="text-body-secondary fw-bold tet-capitalize">
-                      {ietm.author.username}
+                      {item.author.username}
                     </small>
                   </div>
                 </div>
@@ -50,7 +55,7 @@ function Home() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

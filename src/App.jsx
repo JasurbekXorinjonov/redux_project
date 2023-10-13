@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { Home, Login, Register } from "./components";
+import { ArticleDetail, Home, Login, Register } from "./components";
 import Navbar from "./components/Navbar";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -42,11 +42,14 @@ function App() {
   return (
     <div>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
+      <div className="container">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/article/:slug" element={<ArticleDetail />} />
+        </Routes>
+      </div>
     </div>
   );
 }
